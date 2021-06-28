@@ -18,14 +18,17 @@
 
             <div class="border p-3 p-md-5 bg-white mt-4 rounded shadow">
               <h2>Contacto</h2>
-              <form action="">
+              <form @submit.prevent="sendEmail()">
                 <label for="email">Email</label>
-               <input type="text" class='form-control' name="emailClient" id="emailClient" placeholder="juan@gmail.com..">
+               <input v-model="email" type="text" class='form-control' name="emailClient" id="emailClient" placeholder="juan@gmail.com..">
                 <label for="message">Mensaje</label>
                
-                <textarea name="messageBody" class="form-control mb-3" id="bodyMessage" rows="6" style="min-width: 100%"></textarea>
+                <textarea v-model="message" name="messageBody" class="form-control mb-3" id="bodyMessage" rows="6" style="min-width: 100%"></textarea>
                 <small class="form-text text-muted d-block">Cualquier duda o información que necesites enviamela...</small>
                 <input type="button" class="btn btn-primary" value="Enviar">
+                <div class="mt-4">
+                    <p class="m-0">{{messageResult}}</p>
+                </div>
               </form>
             </div>
           </div>
@@ -63,13 +66,25 @@
 </template>
 
 <script>
+import {Auth} from '@/firebase/auth.js';
+
 export default {
+
   data () {
     return {
       name_profesional: 'Gennari Gustavo',
-      job_profesional : 'Developer Web'
+      job_profesional : 'Developer Web',
+      email : '',
+      message : '',
+      messageResult : 'Mensaje Enviado'
     }
   
+  }, 
+  methods:{
+    sendEmail : function(event){
+    console.log("enviar mail");
+
+    }
   }
 }
 </script>
